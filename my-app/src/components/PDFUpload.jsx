@@ -32,6 +32,7 @@ function PDFUpload() {
   const [documentToDelete, setDocumentToDelete] = useState(null);
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [conversationId, setConversationId] = useState(null);
 
   const MAX_POLLS = 60;
   const POLL_INTERVAL = 5000;
@@ -81,6 +82,21 @@ function PDFUpload() {
       }
     };
   }, [pollCount]);
+
+  // Add polling for document status
+  useEffect(() => {
+    const pollInterval = setInterval(() => {
+      if (documents.some(doc => 
+        doc.processing_status === 'processing' || 
+        doc.processing_status === 'extracting_text' || 
+        doc.processing_status === 'creating_index'
+      )) {
+        fetchAndUpdate();
+      }
+    }, 5000); // Poll every 5 seconds
+
+    return () => clearInterval(pollInterval);
+  }, [documents]);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -154,6 +170,27 @@ function PDFUpload() {
     try {
       const response = await axios.get('http://localhost:8000/documents');
       setDocuments(response.data);
+    } catch (error) {
+      console.error('Error fetching documents:', error);
+    }
+  };
+
+  const fetchAndUpdate = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/documents');
+      setDocuments(response.data);
+      
+      // Update selected document if it exists
+      if (selectedDocument) {
+        const updatedDoc = response.data.find(doc => doc.id === selectedDocument.id);
+        if (updatedDoc) {
+          setSelectedDocument(updatedDoc);
+          // If document is now processed, fetch conversation history
+          if (updatedDoc.is_processed && !selectedDocument.is_processed) {
+            fetchConversationHistory(updatedDoc.id);
+          }
+        }
+      }
     } catch (error) {
       console.error('Error fetching documents:', error);
     }
@@ -239,35 +276,83 @@ function PDFUpload() {
     }
   };
 
-  const handleDocumentSelect = (doc) => {
+  const handleDocumentSelect = async (doc) => {
     setSelectedDocument(doc);
-    setQuestion('');
-    setChatHistory([]);
+    setConversationId(null); // Reset conversation when selecting a new document
+    setChatHistory([]); // Clear chat history for new document
+    
     if (doc.is_processed) {
-      fetchConversationHistory(doc.id);
+      try {
+        const response = await axios.get(`http://localhost:8000/conversations/${doc.id}`);
+        if (response.data.length > 0) {
+          // Get the latest conversation
+          const latestConversation = response.data[0];
+          setConversationId(latestConversation.id);
+          
+          // Format chat history from conversation messages
+          const formattedHistory = latestConversation.messages.map(msg => ({
+            role: msg.role,
+            content: msg.content,
+            timestamp: msg.timestamp
+          }));
+          setChatHistory(formattedHistory);
+        }
+      } catch (error) {
+        console.error('Error fetching conversation history:', error);
+      }
     }
   };
 
-  const handleAskQuestion = async (e) => {
-    e.preventDefault();
+  const handleAskQuestion = async () => {
     if (!question.trim() || !selectedDocument) return;
 
     setIsAsking(true);
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8000/ask', {
-        document_id: selectedDocument.id,
-        question: question,
-        conversation_id: conversationId
-      });
+      // Add user's question to chat history immediately
+      const userMessage = {
+        role: 'user',
+        content: question.trim(),
+        timestamp: new Date().toISOString()
+      };
+      
+      // Store the current question before clearing it
+      const currentQuestion = question.trim();
+      setQuestion(''); // Clear the input immediately
+      
+      // Update chat history with user's question
+      setChatHistory(prevHistory => [...prevHistory, userMessage]);
 
-      setChatHistory(prev => [...prev, 
-        { type: 'question', content: question, timestamp: new Date() },
-        { type: 'answer', content: response.data.answer, timestamp: new Date() }
-      ]);
-      setQuestion('');
+      // Prepare the request payload
+      const requestPayload = {
+        document_id: selectedDocument.id,
+        question: currentQuestion
+      };
+
+      // Only add conversation_id if it exists
+      if (conversationId) {
+        requestPayload.conversation_id = conversationId;
+      }
+
+      const response = await axios.post('http://localhost:8000/ask', requestPayload);
+
+      // Add assistant's response to chat history
+      const assistantMessage = {
+        role: 'assistant',
+        content: response.data.answer,
+        timestamp: new Date().toISOString()
+      };
+      
+      // Update chat history with assistant's response
+      setChatHistory(prevHistory => [...prevHistory, assistantMessage]);
+      
+      // Update conversation ID if this is a new conversation
+      if (response.data.conversation_id) {
+        setConversationId(response.data.conversation_id);
+      }
     } catch (error) {
+      console.error('Error asking question:', error);
       setError(error.response?.data?.detail || 'Failed to get answer');
     } finally {
       setIsAsking(false);
@@ -357,35 +442,46 @@ function PDFUpload() {
         <h2>Ask Questions</h2>
         {selectedDocument ? (
           <>
-            <div className="chat-container">
+            <div className="chat-history">
               {chatHistory.map((message, index) => (
-                <div key={index} className={`chat-message ${message.type}`}>
-                  <div className="message-content">{message.content}</div>
+                <div key={index} className={`chat-message ${message.role}`}>
+                  <div className="message-content">
+                    {message.role === 'user' ? 'Q: ' : 'A: '}
+                    {message.content}
+                  </div>
                   <div className="message-timestamp">
-                    {message.timestamp instanceof Date ? 
-                      message.timestamp.toLocaleTimeString() : 
-                      new Date(message.timestamp).toLocaleTimeString()}
+                    {new Date(message.timestamp).toLocaleTimeString()}
                   </div>
                 </div>
               ))}
+              {isAsking && (
+                <div className="chat-message assistant">
+                  <div className="message-content">
+                    Thinking...
+                  </div>
+                </div>
+              )}
             </div>
-            <form onSubmit={handleAskQuestion} className="question-form">
+            <div className="question-input">
               <textarea
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
-                onKeyPress={handleKeyPress}
                 placeholder="Ask a question about the document..."
-                className="question-input"
-                disabled={isAsking || !selectedDocument.is_processed}
+                disabled={!selectedDocument || isAsking}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleAskQuestion();
+                  }
+                }}
               />
               <button 
-                type="submit" 
-                className="ask-button"
-                disabled={!question.trim() || isAsking || !selectedDocument.is_processed}
+                onClick={handleAskQuestion}
+                disabled={!selectedDocument || !question.trim() || isAsking}
               >
                 {isAsking ? 'Asking...' : 'Ask'}
               </button>
-            </form>
+            </div>
           </>
         ) : (
           <div className="no-document-selected">
