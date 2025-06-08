@@ -1,0 +1,41 @@
+
+
+--- Page 1 ---
+                                                   COVER LETTER  
+Shruti Pathak​
+ 📞 +91 8709987702​
+ 📧 sp.18pathak@gmail.com​
+ 📍 Bhubaneswar, India​
+ LinkedIn | GitHub 
+Date: May 12, 2025 
+To​
+ Hiring Manager​
+ JPMorgan Chase & Co. 
+Dear Hiring Manager, 
+I am writing to express my interest in the Software Engineering role at JPMorgan. As a final-year 
+B.Tech student in Electronics & Computer Science at KIIT University with a CGPA of 7.97, I am 
+passionate about solving real-world problems through technology and have built a solid 
+foundation in full-stack development, algorithms, and system design. 
+Through my hands-on projects—like building CartMapper, a smart shopping assistant with 
+QR-based navigation and multilingual voice support using React, and developing a Database 
+Management System with Flask and MySQL—I’ve gained experience working across the stack 
+and creating scalable, user-centric applications. My YouTube Sentiment Analysis project, 
+which utilizes FastAPI, TextBlob, and Chart.js, allowed me to combine my backend and data 
+visualization skills to create an end-to-end web service. 
+I have consistently taken the initiative to improve my technical skills, completing a DSA course 
+by Abdul Bari, participating in hackathons, and being an active member of E-CELL’s tech team. I 
+thrive in collaborative environments, communicate effectively, and stay focused on details while 
+always keeping the bigger picture in mind. 
+I’m drawn to JPMorgan not just for its innovative tech stack and global impact but also for the 
+learning opportunities it provides to young engineers. I’m excited about the possibility of 
+contributing to projects that make a real difference at scale and growing in a team that values 
+innovation, diversity, and resilience. 
+I hope you consider my application . I look forward to the opportunity to discuss how my 
+background and interests align with JPMorgan’s vision. I’m available for an interview at your 
+convenience. 
+Warm regards,​
+ Shruti Pathak 
+
+
+--- Page 2 ---
+ 

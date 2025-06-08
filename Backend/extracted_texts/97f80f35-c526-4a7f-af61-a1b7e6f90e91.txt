@@ -1,0 +1,37 @@
+Shruti Pathak​
+ 📞 +91 8709987702​
+ ✉️ sp.18pathak@gmail.com​
+ 📍 Bhubaneswar, India​
+ LinkedIn | GitHub
+ 
+Cover Letter 
+Dear Hiring Manager, 
+I am writing to express my interest in a frontend development or full-stack development role at 
+your organization. As a final-year B.Tech student in Electronics and Computer Science at KIIT 
+University with a CGPA of 8.08, I have consistently blended academic learning with hands-on 
+project development and team leadership. 
+During my time as a Tech Team Member at KIIT E-Cell, I had the opportunity to coordinate 
+technical events like Smart India Hackathon 2023 and Internship Camp 2023, strengthening 
+my ability to manage real-world projects under pressure. Later, as Senior Executive of Public 
+& Corporate Relations, I led the “Blind Pitch” segment at the flagship E-Summit, gaining 
+valuable experience in communication, event leadership, and problem-solving. 
+My project experience ranges from building a fully responsive e-commerce website (Sadak 
+Shoe) to creating an intelligent retail assistant (CartMapper) using React.js, Material-UI, and 
+QR-based mapping. I’ve also worked on a Flask-based database management system that 
+included secure user authentication and document sharing. These projects reflect not only my 
+technical proficiency in JavaScript, Python, React, and Flask, but also my commitment to 
+user-centric design and accessible interfaces. 
+Beyond my technical skills, I’m deeply interested in GenAI technologies and have worked with 
+LLMs, Langchain, and Huggingface, reflecting my eagerness to explore emerging trends. I’ve 
+also completed a DSA course by Abdul Bari, further strengthening my problem-solving 
+capabilities. 
+I am seeking an opportunity where I can contribute meaningfully to innovative projects, grow as 
+a software developer, and collaborate with a team that values learning, creativity, and impact. I 
+am confident that my background in web technologies, problem-solving, and team collaboration 
+makes me a strong fit for your team. 
+Thank you for considering my application. I would welcome the chance to further discuss how 
+my skills and enthusiasm align with your goals. I am available at your convenience for an 
+interview. 
+Warm regards,​
+ Shruti Pathak 
+ 

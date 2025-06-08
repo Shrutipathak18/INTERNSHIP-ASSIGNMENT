@@ -1,0 +1,55 @@
+
+
+--- Page 1 ---
+SHRUTI PATHAK
+Ó +91 8709987702
+¯ LinkedIn
+ GitHub
+R 2230121@kiit.ac.in
+sp.18pathak@gmail.com
+A detail-oriented communicator and problem solver with a strong ability to collaborate and thrive in
+team environments. Passionate about applying technical skills to build impactful solutions.
+Education
+B.Tech (Electronics & Computer Science)
+KIIT DU, Bhubaneswar 8.08 CGPA
+12th Science
+D.A.V Public School, Ranchi, Jharkhand 88%
+10th CBSE
+D.A.V Public School, Ranchi, Jharkhand 92.5%
+Experience
+• Tech Team Member, KIIT E-Cell (2022–2023)
+– Served as Point of Contact (POC) for Smart India Hackathon (SIH) 2023
+– Coordinated technical operations for Internship Camp 2023
+• Senior Executive, Public & Corporate Relations (PCR), KIIT E-Cell (2024–2025)
+– Lead of the Blind Pitch segment in the flagship event E-Summit
+Projects
+• Sadak Shoe – Urban Footwear E-Commerce Website:GITHUB
+– Developed a fully responsive e-commerce website for NIFT Delhi students for their jury using
+HTML, CSS, and JavaScript.
+– Designed homepage, login page, search feature, carousel (Swiper.js), and featured product
+section.
+– Added brand elements, hero GIF animation, sticky navbar, and smooth scrolling.
+• CartMapper: A smart shopping assistant application for retail stores GITHUB
+– Developed responsive frontend using React.js with Material-UI components and React Router
+for seamless navigation.
+– Implemented store mapping features with QR code scanning for product location tracking.
+– Added multilingual voice support to enhance accessibility for diverse users.
+– Designed clean, maintainable architecture following React best practices.
+• Database Management System: Web app for user authentication, profile management, and
+document sharing using Flask and MySQL. GITHUB
+– Implemented user authentication with secure login and registration functionality.
+– Designed a MySQL database to store user credentials and personal information.
+– Enabled users to update personal details and reset passwords.
+– Integrated a grading system where users can view their marks but cannot modify them.
+Skills
+• Languages: C, C++, JavaScript, Python
+• Web Technologies: HTML5, CSS3, Tailwind CSS, Github, React.JS, Flask REST API. Ex-
+press, MongoDB,Node.js, BootStrap.
+• Computer Science: Data Structures and Algorithms, Database Management System, MySQL,
+OOPS, Operating System, Computer System Architecture, Cloud Computing (GCP, AWS, AZURE)
+• GEN-AI: LLMs,Langchain,Llama-Index, Huggingface
+• Area of Interest: Web Development, Computer Science, Competitive Programming
+Certificates
+• Completed DSA course on Udemy by Abdul Bari
+• Took part in more than 3+ hackathons
+1
